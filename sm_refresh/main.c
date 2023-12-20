@@ -85,7 +85,6 @@ int main() {
         }
         else
         {
-            clearInputBuffer();
             T_result r = minimax(pSuperMorpion,5,0,0);
             S = ajouteSuperPosition(*pSuperMorpion,r.position,1);
             pSuperMorpion = &S;
