@@ -6,10 +6,14 @@
 T_result minimax(T_superM morpi, int depth, int traitOrdi, int visible)
 {
     T_result resultat = { "     " , 0};
-    int i = checkSuperGagnant(morpi);
-    if (i)
+    int i = checkSuperGagnant(morpi,0);
+    if (i==1||i==3-traitOrdi)
     {
-        resultat.poids = i-1;
+        return resultat;
+    }
+    else if (i==traitOrdi+2)
+    {
+        resultat.poids++;
         return resultat;
     }
 

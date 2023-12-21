@@ -36,7 +36,7 @@
 void showSuperGrille(T_superM pSuperMorpion);
 T_superMorpion newSuperMorpion();
 T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible); //visible permet d'afficher quelque chose ou non
-int checkSuperGagnant(T_superM pSuperMorpion);
+int checkSuperGagnant(T_superM pSuperMorpion, int visible);
 void showSuperGrilleState(T_superM pSuperMorpion);
 void showPosition(T_superM pSuperMorpion);
 
