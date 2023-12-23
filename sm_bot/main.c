@@ -31,7 +31,7 @@ int main()
     T_superMorpion morpi = newSuperMorpion();
     T_superM pmorpi = &morpi;
 
-    T_result r = alphabeta(pmorpi,7,1,-99999,99999,0);
+    T_result r = negalphabeta(pmorpi,7,-99999,99999,0);
 
     printf("ALPHABETA : %d  %s\n",r.poids,r.position);
 
