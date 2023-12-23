@@ -681,9 +681,9 @@ int evalPositionMorpion(T_superMorpion morpi,int trait,int stop)
         {
             T_superMorpion temp = morpi;
             temp.grille[tabState[i][0]].state = -1;
-            k = max(k,evalPositionMorpion(temp,trait,2));
+            k += evalPositionMorpion(temp,trait,2);
         }
-        return k;
+        return k/4;
         break;
     case 5:
         if (tabState[0][1]==tabState[1][1]==tabState[2][1]==tabState[3][1]==tabState[4][1])
@@ -698,9 +698,9 @@ int evalPositionMorpion(T_superMorpion morpi,int trait,int stop)
         {
             T_superMorpion temp = morpi;
             temp.grille[tabState[i][0]].state = -1;
-            asd = max(asd,evalPositionMorpion(temp,trait,2));
+            asd += (asd,evalPositionMorpion(temp,trait,2));
         }
-        return asd;
+        return asd/5;
         break;
     case 6:
         int qwe = 0;
@@ -708,9 +708,9 @@ int evalPositionMorpion(T_superMorpion morpi,int trait,int stop)
         {
             T_superMorpion temp = morpi;
             temp.grille[tabState[i][0]].state = -1;
-            qwe = max(qwe,evalPositionMorpion(temp,trait,2));
+            qwe += (qwe,evalPositionMorpion(temp,trait,2));
         }
-        return qwe;
+        return qwe/6;
         break;
     case 7:
         int zxc = 0;
@@ -718,9 +718,9 @@ int evalPositionMorpion(T_superMorpion morpi,int trait,int stop)
         {
             T_superMorpion temp = morpi;
             temp.grille[tabState[i][0]].state = -1;
-            zxc = max(zxc,evalPositionMorpion(temp,trait,2));
+            zxc += (zxc,evalPositionMorpion(temp,trait,2));
         }
-        return zxc;
+        return zxc/7;
         break;
     case 8:
         int xcv = 0;
@@ -728,9 +728,9 @@ int evalPositionMorpion(T_superMorpion morpi,int trait,int stop)
         {
             T_superMorpion temp = morpi;
             temp.grille[tabState[i][0]].state = -1;
-            xcv = max(xcv,evalPositionMorpion(temp,trait,2));
+            xcv += (xcv,evalPositionMorpion(temp,trait,2));
         }
-        return xcv;
+        return xcv/8;
         break;
     default:
         break;
