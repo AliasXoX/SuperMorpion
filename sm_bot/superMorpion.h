@@ -1,4 +1,6 @@
 #include "morpion.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAXLEN 9999
 
@@ -38,6 +40,9 @@ T_superMorpion newSuperMorpion();
 T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible); //visible permet d'afficher quelque chose ou non
 int checkSuperGagnant(T_superM pSuperMorpion, int visible);
 void showSuperGrilleState(T_superM pSuperMorpion);
-void showPosition(T_superM pSuperMorpion);
+void showPosition(T_superM pSuperMorpion,int,FILE* fichier);
+T_superMorpion decryptSuper(char *);
+
+int evalTemps(char*);
 
 

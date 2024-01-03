@@ -82,8 +82,30 @@
             return 1;
         }
         
-        int gagnant = 0;
+        int corres[9] = {6,3,0,7,4,1,8,5,2};
+
+        int a = 'X';
+        if (pMorpion->grille[corres[0]] + pMorpion->grille[corres[1]] + pMorpion->grille[corres[2]] == a * 3 || pMorpion->grille[corres[3]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[5]] == a * 3 || pMorpion->grille[corres[6]] + pMorpion->grille[corres[7]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[0]] + pMorpion->grille[corres[3]] + pMorpion->grille[corres[6]] == a * 3 || pMorpion->grille[corres[1]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[7]] == a * 3 ||
+        pMorpion->grille[corres[2]] + pMorpion->grille[corres[5]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[0]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[2]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[6]] == a * 3) 
+        {
+            if (visible) {printf("Le joueur 1 a gagné un morpion !\n");}
+            pMorpion->state = 1;
+            return 1;
+        }
+
+        a = 'O';
+        if (pMorpion->grille[corres[0]] + pMorpion->grille[corres[1]] + pMorpion->grille[corres[2]] == a * 3 || pMorpion->grille[corres[3]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[5]] == a * 3 || pMorpion->grille[corres[6]] + pMorpion->grille[corres[7]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[0]] + pMorpion->grille[corres[3]] + pMorpion->grille[corres[6]] == a * 3 || pMorpion->grille[corres[1]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[7]] == a * 3 ||
+        pMorpion->grille[corres[2]] + pMorpion->grille[corres[5]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[0]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[8]] == a * 3 || pMorpion->grille[corres[2]] + pMorpion->grille[corres[4]] + pMorpion->grille[corres[6]] == a * 3) 
+        {
+            if (visible) {printf("Le joueur 2 a gagné un morpion !\n");}
+            pMorpion->state = 0;
+            return 1;
+        }
+
+        return 0;
+        /*
         int column = 0;
+        
         while ((column < 3) && (!gagnant)) {
             if ((pMorpion->grille[column*4] != '.') && (pMorpion->grille[column*4 + 1] != '.') && (pMorpion->grille[column*4 + 2] != '.') && (pMorpion->grille[column*4] == pMorpion->grille[column*4 + 1]) && (pMorpion->grille[column*4] == pMorpion->grille[column*4 + 2])) {
                 gagnant = 1;
@@ -119,8 +141,7 @@
                 }
             }
         }
-        
-        return gagnant;
+        */
     }
 
     void showGrilleState(T_morp pMorpion) {
