@@ -35,14 +35,12 @@
  7 8 9
  */
 
-void showSuperGrille(T_superM pSuperMorpion);
-T_superMorpion newSuperMorpion();
-T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible); //visible permet d'afficher quelque chose ou non
-int checkSuperGagnant(T_superM pSuperMorpion, int visible);
-void showSuperGrilleState(T_superM pSuperMorpion);
-void showPosition(T_superM pSuperMorpion,int,FILE* fichier);
-T_superMorpion decryptSuper(char *);
 
-int evalTemps(char*);
+T_superMorpion newSuperMorpion(); //Crée une grille vide de super morpion
+T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible); //Joue le coup entré en paramètre sur le super morpion entré en paramètre ; visible permet d'afficher quelque chose ou non
+int checkSuperGagnant(T_superM pSuperMorpion, int visible); //Renvoi 1 si match nul , 2 si le joueur 1 gagne , 3 si le joueur 2 gagne et 0 sinon
+T_superMorpion decryptSuper(char *); //Construit une grille de super morpion à partir d'une chaîne FEN
+
+int evalTemps(char*); //Renvoi le nombre de cases désormais injouables sur la grille de super morpion associée à la chaîne FEN entrée en argument
 
 
