@@ -73,7 +73,7 @@ int main() {
     }
     
     if (traitOrdi) {
-        T_superResult r = superMinimax(pSuperMorpion, depth, traitOrdi);
+        T_superResult r = superMinimax(*pSuperMorpion, depth, traitOrdi);
         pSuperMorpion = ajouteSuperPosition(pSuperMorpion, r.position, 1);
         showSuperGrille(pSuperMorpion);
         showSuperGrilleState(pSuperMorpion);
@@ -120,7 +120,7 @@ int main() {
         showPosition(pSuperMorpion, chemin);
     }
     
-    while (!checkSuperGagnant(pSuperMorpion)) {
+    while (!checkSuperGagnant(pSuperMorpion,1)) {
         
         if (pSuperMorpion->trait != traitOrdi)
         {
@@ -168,7 +168,7 @@ int main() {
                     showSuperGrilleState(pSuperMorpion);
                     showPosition(pSuperMorpion, chemin);
                 } else {
-                    T_superResult r = superMinimax(pSuperMorpion, 1, traitOrdi);
+                    T_superResult r = superMinimax(*pSuperMorpion, 1, traitOrdi);
                     pSuperMorpion = ajouteSuperPosition(pSuperMorpion, r.position, 1);
                     printf("r.position = %s\n", r.position);
                     showSuperGrille(pSuperMorpion);
@@ -186,9 +186,9 @@ int main() {
         else
         {
             //le robot
-            T_superResult r = superMinimax(pSuperMorpion, depth, traitOrdi);
+            T_superResult r = superMinimax(*pSuperMorpion, depth, traitOrdi);
             pSuperMorpion = ajouteSuperPosition(pSuperMorpion, r.position, 1);
-            printf("r.position = %s\n", r.position);
+            //printf("r.position = %s\n", r.position);
             showSuperGrille(pSuperMorpion);
             showSuperGrilleState(pSuperMorpion);
             showPosition(pSuperMorpion, chemin);

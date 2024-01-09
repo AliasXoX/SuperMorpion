@@ -10,9 +10,10 @@ typedef struct {
 } T_superResult;
 */
 
-T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi) {
+T_superResult superMinimax(T_superMorpion SuperMorpion, int depth, int traitOrdi) {
     T_superResult resultat = {"", 0};
-    int i = checkSuperGagnant(pSuperMorpion);
+    T_superM pSuperMorpion = &SuperMorpion;
+    int i = checkSuperGagnant(pSuperMorpion,0);
     if (i) {
         resultat.poids = i-1;
         return resultat;
@@ -38,8 +39,7 @@ T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi) {
                     }
 
                     pSuperMorpion = ajouteSuperPosition(pSuperMorpion, position, 0);
-                    int k = superMinimax(pSuperMorpion,depth-1,traitOrdi).poids;
-                    pSuperMorpion = removeLastSuperPosition(pSuperMorpion, position, 0);
+                    int k = superMinimax(SuperMorpion,depth-1,traitOrdi).poids;
                     
                     if (resultat.poids<k)
                     {
@@ -67,7 +67,7 @@ T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi) {
                         }
 
                         pSuperMorpion = ajouteSuperPosition(pSuperMorpion, position, 0);
-                        int k = superMinimax(pSuperMorpion,depth-1,traitOrdi).poids;
+                        int k = superMinimax(SuperMorpion,depth-1,traitOrdi).poids;
                         pSuperMorpion = removeLastSuperPosition(pSuperMorpion, position, 1);
                         
                         if (resultat.poids<k)
@@ -98,7 +98,7 @@ T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi) {
                     }
                     
                     pSuperMorpion = ajouteSuperPosition(pSuperMorpion,position, 0);
-                    int k = superMinimax(pSuperMorpion,depth-1,traitOrdi).poids;
+                    int k = superMinimax(SuperMorpion,depth-1,traitOrdi).poids;
                     
                     pSuperMorpion = removeLastSuperPosition(pSuperMorpion, position, 0);
                     
@@ -127,7 +127,7 @@ T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi) {
                         }
 
                         pSuperMorpion = ajouteSuperPosition(pSuperMorpion,position, 0);
-                        int k = superMinimax(pSuperMorpion,depth-1,traitOrdi).poids;
+                        int k = superMinimax(SuperMorpion,depth-1,traitOrdi).poids;
                         pSuperMorpion = removeLastSuperPosition(pSuperMorpion, position, 1);
                         
                         if (resultat.poids>k)

@@ -7,4 +7,4 @@ typedef struct
 } T_superResult;
 
 
-T_superResult superMinimax(T_superM pSuperMorpion, int depth, int traitOrdi);
+T_superResult superMinimax(T_superMorpion SuperMorpion, int depth, int traitOrdi);

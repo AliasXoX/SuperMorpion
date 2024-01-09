@@ -29,11 +29,11 @@ void showSuperGrille(T_superM pSuperMorpion) {
         int a = pSuperMorpion->grille[i].state;
         int b = pSuperMorpion->grille[i+1].state;
         int c = pSuperMorpion->grille[i+2].state;
-        if ((a == -1) && (b == -1) && (c == -1)) {
+        if ((a <= -1) && (b <= -1) && (c <= -1)) {
             printf("|%c %c %c|%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i].grille[2], pSuperMorpion->grille[i].grille[5], pSuperMorpion->grille[i].grille[8], pSuperMorpion->grille[i+1].grille[2], pSuperMorpion->grille[i+1].grille[5], pSuperMorpion->grille[i+1].grille[8], pSuperMorpion->grille[i+2].grille[2], pSuperMorpion->grille[i+2].grille[5], pSuperMorpion->grille[i+2].grille[8]);
             printf("|%c %c %c|%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7], pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7], pSuperMorpion->grille[i+2].grille[1], pSuperMorpion->grille[i+2].grille[4], pSuperMorpion->grille[i+2].grille[7]);
             printf("|%c %c %c|%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6], pSuperMorpion->grille[i+1].grille[0], pSuperMorpion->grille[i+1].grille[3], pSuperMorpion->grille[i+1].grille[6], pSuperMorpion->grille[i+2].grille[0], pSuperMorpion->grille[i+2].grille[3], pSuperMorpion->grille[i+2].grille[6]);
-        } else if ((a != -1) && (b == -1) && (c == -1)) {
+        } else if ((a > -1) && (b <= -1) && (c <= -1)) {
             if (a) {
                 printf("|/   /|%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i+1].grille[2], pSuperMorpion->grille[i+1].grille[5], pSuperMorpion->grille[i+1].grille[8], pSuperMorpion->grille[i+2].grille[2], pSuperMorpion->grille[i+2].grille[5], pSuperMorpion->grille[i+2].grille[8]);
                 printf("|  X  |%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7], pSuperMorpion->grille[i+2].grille[1], pSuperMorpion->grille[i+2].grille[4], pSuperMorpion->grille[i+2].grille[7]);
@@ -43,7 +43,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                 printf("||   ||%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7], pSuperMorpion->grille[i+2].grille[1], pSuperMorpion->grille[i+2].grille[4], pSuperMorpion->grille[i+2].grille[7]);
                 printf("|/___/|%c %c %c|%c %c %c|\n", pSuperMorpion->grille[i+1].grille[0], pSuperMorpion->grille[i+1].grille[3], pSuperMorpion->grille[i+1].grille[6], pSuperMorpion->grille[i+2].grille[0], pSuperMorpion->grille[i+2].grille[3], pSuperMorpion->grille[i+2].grille[6]);
             }
-        } else if ((a == -1) && (b != -1) && (c == -1)) {
+        } else if ((a <= -1) && (b > -1) && (c <= -1)) {
             if (b) {
                 printf("|%c %c %c|/   /|%c %c %c|\n", pSuperMorpion->grille[i].grille[2], pSuperMorpion->grille[i].grille[5], pSuperMorpion->grille[i].grille[8], pSuperMorpion->grille[i+2].grille[2], pSuperMorpion->grille[i+2].grille[5], pSuperMorpion->grille[i+2].grille[8]);
                 printf("|%c %c %c|  X  |%c %c %c|\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7], pSuperMorpion->grille[i+2].grille[1], pSuperMorpion->grille[i+2].grille[4], pSuperMorpion->grille[i+2].grille[7]);
@@ -53,7 +53,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                 printf("|%c %c %c||   ||%c %c %c|\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7], pSuperMorpion->grille[i+2].grille[1], pSuperMorpion->grille[i+2].grille[4], pSuperMorpion->grille[i+2].grille[7]);
                 printf("|%c %c %c|/___/|%c %c %c|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6], pSuperMorpion->grille[i+2].grille[0], pSuperMorpion->grille[i+2].grille[3], pSuperMorpion->grille[i+2].grille[6]);
             }
-        } else if ((a == -1) && (b == -1) && (c != -1)) {
+        } else if ((a <= -1) && (b <= -1) && (c > -1)) {
             if (c) {
                 printf("|%c %c %c|%c %c %c|/   /|\n", pSuperMorpion->grille[i].grille[2], pSuperMorpion->grille[i].grille[5], pSuperMorpion->grille[i].grille[8], pSuperMorpion->grille[i+1].grille[2], pSuperMorpion->grille[i+1].grille[5], pSuperMorpion->grille[i+1].grille[8]);
                 printf("|%c %c %c|%c %c %c|  X  |\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7], pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7]);
@@ -63,7 +63,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                 printf("|%c %c %c|%c %c %c||   ||\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7], pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7]);
                 printf("|%c %c %c|%c %c %c|/___/|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6], pSuperMorpion->grille[i+1].grille[0], pSuperMorpion->grille[i+1].grille[3], pSuperMorpion->grille[i+1].grille[6]);
             }
-        } else if ((a != -1) && (b != -1) && (c == -1)) {
+        } else if ((a > -1) && (b > -1) && (c <= -1)) {
             if (a == b) {
                 if (a) {
                     printf("|/   /|/   /|%c %c %c|\n", pSuperMorpion->grille[i+2].grille[2], pSuperMorpion->grille[i+2].grille[5], pSuperMorpion->grille[i+2].grille[8]);
@@ -86,10 +86,11 @@ void showSuperGrille(T_superM pSuperMorpion) {
                     printf("|/___/|/   /|%c %c %c|\n", pSuperMorpion->grille[i+2].grille[0], pSuperMorpion->grille[i+2].grille[3], pSuperMorpion->grille[i+2].grille[6]);
                 }
             }
-        } else if ((a != -1) && (b == -1) && (c != -1)) {
+        } else if ((a > -1) && (b <= -1) && (c > -1)) {
             if (a == c) {
                 if (a) {
                     printf("|/   /|%c %c %c|/   /|\n", pSuperMorpion->grille[i+1].grille[2], pSuperMorpion->grille[i+1].grille[5], pSuperMorpion->grille[i+1].grille[8]);                    printf("|  X  |%c %c %c|  X  |\n", pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7]);
+                    printf("|  X  |%c %c %c|  X  |\n", pSuperMorpion->grille[i+1].grille[1], pSuperMorpion->grille[i+1].grille[4], pSuperMorpion->grille[i+1].grille[7]);
                     printf("|/   /|%c %c %c|/   /|\n", pSuperMorpion->grille[i+1].grille[0], pSuperMorpion->grille[i+1].grille[3], pSuperMorpion->grille[i+1].grille[6]);
                 } else {
                     printf("|/---/|%c %c %c|/---/|\n", pSuperMorpion->grille[i+1].grille[2], pSuperMorpion->grille[i+1].grille[5], pSuperMorpion->grille[i+1].grille[8]);
@@ -107,7 +108,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                     printf("|/___/|%c %c %c|/   /|\n", pSuperMorpion->grille[i+1].grille[0], pSuperMorpion->grille[i+1].grille[3], pSuperMorpion->grille[i+1].grille[6]);
                 }
             }
-        } else if ((a == -1) && (b != -1) && (c != -1)) {
+        } else if ((a <= -1) && (b > -1) && (c > -1)) {
             if (b == c) {
                 if (b) {
                     printf("|%c %c %c|/   /|/   /|\n", pSuperMorpion->grille[i].grille[2], pSuperMorpion->grille[i].grille[5], pSuperMorpion->grille[i].grille[8]);
@@ -119,7 +120,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                     printf("|%c %c %c|/___/|/___/|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6]);
                 }
             } else {
-                if (a) {
+                if (b) {
                     printf("|%c %c %c|/   /|/---/|\n", pSuperMorpion->grille[i].grille[2], pSuperMorpion->grille[i].grille[5], pSuperMorpion->grille[i].grille[8]);
                     printf("|%c %c %c|  X  ||   ||\n", pSuperMorpion->grille[i].grille[1], pSuperMorpion->grille[i].grille[4], pSuperMorpion->grille[i].grille[7]);
                     printf("|%c %c %c|/   /|/___/|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6]);
@@ -129,7 +130,7 @@ void showSuperGrille(T_superM pSuperMorpion) {
                     printf("|%c %c %c|/___/|/   /|\n", pSuperMorpion->grille[i].grille[0], pSuperMorpion->grille[i].grille[3], pSuperMorpion->grille[i].grille[6]);
                 }
             }
-        } else if ((a != -1) && (b != -1) && (c != -1)) {
+        } else if ((a > -1) && (b > -1) && (c > -1)) {
             if ((a == b) && (a == c)) {
                 if (a) {
                     printf("|/   /|/   /|/   /|\n");
@@ -189,7 +190,7 @@ T_superM ajouteSuperPosition(T_superM pSuperMorpion, char position[5], int showN
     int column = (position[2] - 'a')*3 - 1;
     int line = atoi(&position[3]);
     
-    if ((pSuperMorpion->valide[NB_CASES] != -1) && (nbMorpion + 1 != pSuperMorpion->valide[NB_CASES])) {
+    if ((pSuperMorpion->valide[NB_CASES] > -1) && (nbMorpion + 1 != pSuperMorpion->valide[NB_CASES])) {
         printf("Coup invalide, rejouez en case %d ! (1)\n", pSuperMorpion->valide[NB_CASES]);
         return pSuperMorpion;
     } else if (!pSuperMorpion->grille[nbMorpion].valide[column+line]) {
@@ -237,7 +238,7 @@ T_superM ajouteSuperPosition(T_superM pSuperMorpion, char position[5], int showN
     return pSuperMorpion;
 }
 
-int checkSuperGagnant(T_superM pSuperMorpion) {
+int checkSuperGagnant(T_superM pSuperMorpion, int showGagnant) {
     int s = 0;
     for (int i = 0 ; i < NB_CASES ; i++) {
         if (!pSuperMorpion->valide[i]) {
@@ -247,7 +248,7 @@ int checkSuperGagnant(T_superM pSuperMorpion) {
     if (s < 5) {
         return 0;
     } else if (s == 9) {
-        printf("Match nul !");
+        if (showGagnant) {printf("Match nul !");}
         return 1;
     }
     
@@ -257,28 +258,28 @@ int checkSuperGagnant(T_superM pSuperMorpion) {
         if ((pSuperMorpion->grille[column*3].state >= 0) && (pSuperMorpion->grille[column*3].state == pSuperMorpion->grille[column*3 + 1].state) && (pSuperMorpion->grille[column*3].state == pSuperMorpion->grille[column*3 + 2].state)) {
             gagnant = 1;
             if (pSuperMorpion->grille[column*3].state) {
-                printf("Le gagnant est le joueur 1 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 1 !\n");}
             } else {
-                printf("Le gagnant est le joueur 2 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 2 !\n");}
             }
-        } else if ((pSuperMorpion->grille[column].state != -1) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 3].state) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 6].state)) {
+        } else if ((pSuperMorpion->grille[column].state > -1) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 3].state) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 6].state)) {
             gagnant = 1;
             if (pSuperMorpion->grille[column].state) {
-                printf("Le gagnant est le joueur 1 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 1 !\n");}
             } else {
-                printf("Le gagnant est le joueur 2 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 2 !\n");}
             }
         }
         column++;
     }
     
     if (((pSuperMorpion->grille[2].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[2].state == pSuperMorpion->grille[6].state)) || ((pSuperMorpion->grille[0].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[0].state == pSuperMorpion->grille[8].state))) {
-        if (pSuperMorpion->grille[4].state != -1) {
+        if (pSuperMorpion->grille[4].state > -1) {
             gagnant = 1;
             if (pSuperMorpion->grille[4].state) {
-                printf("Le gagnant est le joueur 1 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 1 !\n");}
             } else {
-                printf("Le gagnant est le joueur 2 !\n");
+                if (showGagnant) {printf("Le gagnant est le joueur 2 !\n");}
             }
         }
     }

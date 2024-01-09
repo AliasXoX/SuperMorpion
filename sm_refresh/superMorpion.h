@@ -28,7 +28,7 @@
 void showSuperGrille(T_superM pSuperMorpion);
 T_superMorpion newSuperMorpion();
 T_superM ajouteSuperPosition(T_superM pSuperMorpion, char position[5], int showNextCase);
-int checkSuperGagnant(T_superM pSuperMorpion);
+int checkSuperGagnant(T_superM pSuperMorpion, int showGagnant);
 void showSuperGrilleState(T_superM pSuperMorpion);
 void showPosition(T_superM pSuperMorpion, char chemin[MAXLEN]);
 T_superM removeLastSuperPosition(T_superM pSuperMorpion, char position[5], int isCaseAuChoix);
