@@ -1,1 +1,1 @@
-main.c morpion.c superMorpion.c minimax.c
+main.c morpion.c superMorpion.c superMinimax.c debug.c

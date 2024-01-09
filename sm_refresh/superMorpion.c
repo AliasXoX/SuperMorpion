@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "superMorpion.h"
 #include "morpion.h"
@@ -183,85 +184,69 @@ T_superMorpion newSuperMorpion() {
     return superMorpion;
 }
 
-T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible) {
+T_superM ajouteSuperPosition(T_superM pSuperMorpion, char position[5], int showNextCase) {
     int nbMorpion = atoi(&position[0]) - 1;
     int column = (position[2] - 'a')*3 - 1;
     int line = atoi(&position[3]);
     
-    if ((superMorpion.valide[NB_CASES] != -1) && (nbMorpion + 1 != superMorpion.valide[NB_CASES])) {
-        if (visible) {printf("Coup invalide, rejouez en case %d !\n", superMorpion.valide[NB_CASES]);}
-        return superMorpion;
-    } else if (!superMorpion.grille[nbMorpion].valide[column+line]) {
-        if (superMorpion.valide[NB_CASES]==-1)
-        {
-            if (visible) {printf("Coup invalide, rejouez votre coup !\n");}
-        }
-        else
-        {
-            if (visible) {printf("Coup invalide, rejouez en case %d !\n", nbMorpion + 1);}
-        }
-        return superMorpion;
+    if ((pSuperMorpion->valide[NB_CASES] != -1) && (nbMorpion + 1 != pSuperMorpion->valide[NB_CASES])) {
+        printf("Coup invalide, rejouez en case %d ! (1)\n", pSuperMorpion->valide[NB_CASES]);
+        return pSuperMorpion;
+    } else if (!pSuperMorpion->grille[nbMorpion].valide[column+line]) {
+        printf("Coup invalide, rejouez en case %d ! (2)\n", nbMorpion + 1);
+        return pSuperMorpion;
+    } else if ((nbMorpion < 0) || (nbMorpion > 8) || (column < -1) || (column > 5) || (line < 1) || (line > 3)) {
+        printf("Coup invalide, rejouez en case %d ! (3)\n", nbMorpion + 1);
+        return pSuperMorpion;
+    } else if (pSuperMorpion->grille[nbMorpion].state >= 0) {
+        printf("Ce morpion est déjà gagné, jouez dans une autre case !\n");
+        return pSuperMorpion;
     }
     
     char nPosition[3];
     nPosition[0] = position[2];
     nPosition[1] = position[3];
     nPosition[2] = '\n';
-    superMorpion.grille[nbMorpion].trait = superMorpion.trait;
-    superMorpion.grille[nbMorpion] = *ajoutePosition(&superMorpion.grille[nbMorpion], nPosition);
+    pSuperMorpion->grille[nbMorpion].trait = pSuperMorpion->trait;
+    pSuperMorpion->grille[nbMorpion] = *ajoutePosition(&pSuperMorpion->grille[nbMorpion], nPosition);
     
-    superMorpion.trait = (superMorpion.trait + 1)%2;
+    pSuperMorpion->trait = (pSuperMorpion->trait + 1)%2;
     
     int corres[] = {6, 3, 0, 7, 4, 1, 8, 5, 2};
     
     int nextMorpion = corres[column+line];
     
-    if (superMorpion.valide[nextMorpion])
-    {
-        superMorpion.valide[NB_CASES] = nextMorpion + 1;
-        if (visible) {printf("Vous jouez maintenant en case %d\n", nextMorpion + 1);}
+    
+    if (checkGagnant(&pSuperMorpion->grille[nbMorpion], showNextCase)) {
+        pSuperMorpion->valide[nbMorpion] = 0;
+    }
+    if (!pSuperMorpion->valide[nextMorpion]) {
+        pSuperMorpion->valide[NB_CASES] = -1;
+        if (showNextCase) {
+            printf("Vous pouvez choisir une case\n");
+        }
     }
     else
     {
-        superMorpion.valide[NB_CASES] = -1;
-        if (visible) {printf("Vous pouvez choisir votre case maintenant\n");}
+        if (showNextCase) {
+            printf("Vous jouez maintenant en case %d\n", nextMorpion + 1);
+        }
+        pSuperMorpion->valide[NB_CASES] = nextMorpion + 1;
     }
     
-    
-    if (checkGagnant(&superMorpion.grille[nbMorpion],visible)) {
-        superMorpion.valide[nbMorpion] = 0;
-    }
-    
-    return superMorpion;
-
+    return pSuperMorpion;
 }
 
-int checkSuperGagnant(T_superM pSuperMorpion,int visible) {
+int checkSuperGagnant(T_superM pSuperMorpion) {
     int s = 0;
     for (int i = 0 ; i < NB_CASES ; i++) {
         if (!pSuperMorpion->valide[i]) {
             s++;
         }
     }
-    if (s < 3) {
+    if (s < 5) {
         return 0;
     } else if (s == 9) {
-        int nbr1;
-        for (int i=0;i<9;i++)
-        {
-            nbr1 += pSuperMorpion->grille[i].state;
-        }
-        if (nbr1>5)
-        {
-            if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-            return 2;
-        }
-        else if (nbr1<5)
-        {
-            if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-            return 3;
-        }
-        
         printf("Match nul !");
         return 1;
     }
@@ -269,52 +254,44 @@ int checkSuperGagnant(T_superM pSuperMorpion,int visible) {
     int gagnant = 0;
     int column = 0;
     while ((column < 3) && (!gagnant)) {
-        if ((pSuperMorpion->grille[column*4].state >= 0) && (pSuperMorpion->grille[column*4].state == pSuperMorpion->grille[column*4 + 1].state) && (pSuperMorpion->grille[column*4].state == pSuperMorpion->grille[column*4 + 2].state)) {
-            if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
+        if ((pSuperMorpion->grille[column*3].state >= 0) && (pSuperMorpion->grille[column*3].state == pSuperMorpion->grille[column*3 + 1].state) && (pSuperMorpion->grille[column*3].state == pSuperMorpion->grille[column*3 + 2].state)) {
+            gagnant = 1;
+            if (pSuperMorpion->grille[column*3].state) {
+                printf("Le gagnant est le joueur 1 !\n");
             } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
+                printf("Le gagnant est le joueur 2 !\n");
             }
-            return gagnant;
         } else if ((pSuperMorpion->grille[column].state != -1) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 3].state) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 6].state)) {
+            gagnant = 1;
             if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
+                printf("Le gagnant est le joueur 1 !\n");
             } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
+                printf("Le gagnant est le joueur 2 !\n");
             }
-            return gagnant;
         }
         column++;
     }
     
     if (((pSuperMorpion->grille[2].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[2].state == pSuperMorpion->grille[6].state)) || ((pSuperMorpion->grille[0].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[0].state == pSuperMorpion->grille[8].state))) {
-        if (pSuperMorpion->grille[4].state != -1) 
-        {
-            if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
+        if (pSuperMorpion->grille[4].state != -1) {
+            gagnant = 1;
+            if (pSuperMorpion->grille[4].state) {
+                printf("Le gagnant est le joueur 1 !\n");
             } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
+                printf("Le gagnant est le joueur 2 !\n");
             }
         }
-        return gagnant;
     }
-
+    
     return gagnant;
 }
-
 
 void showSuperGrilleState(T_superM pSuperMorpion) {
     for (int i = 0 ; i < NB_CASES ; i++) {
         if (pSuperMorpion->valide[i]) {
             showGrilleState(&pSuperMorpion->grille[i]);
         } else {
-            if (pSuperMorpion->grille[i].state) {
+            if (pSuperMorpion->grille[i].state == 1) {
                 printf("X");
             } else {
                 printf("O");
@@ -328,7 +305,7 @@ void showSuperGrilleState(T_superM pSuperMorpion) {
     }
 }
 
-void showPosition(T_superM pSuperMorpion) {
+void showPosition(T_superM pSuperMorpion, char chemin[MAXLEN]) {
     int ordre[] = {2, 5, 8, 1, 4, 7, 0, 3, 6};
     
     FILE* fichier = NULL;
@@ -386,8 +363,100 @@ void showPosition(T_superM pSuperMorpion) {
     
     fclose(fichier);
     
-    int n = system("dot g.dot -T png -o g.png");
+    char commande[MAXLEN];
+    sprintf(commande, "dot g.dot -T png -o %s", chemin);
+    
+    int n = system(commande);
     if (n != 0) {
-        fprintf(stderr, "Impossible de créer le fichier g.png\n");
+        fprintf(stderr, "Impossible de créer le fichier image\n");
     }
+}
+
+T_superM removeLastSuperPosition(T_superM pSuperMorpion, char position[5], int isCaseAuChoix) {
+    int nbMorpion = atoi(&position[0]) - 1;
+    int column = (position[2] - 'a')*3 - 1;
+    int line = atoi(&position[3]);
+    
+    if (isCaseAuChoix) {
+        pSuperMorpion->valide[NB_CASES] = -1;
+    } else {
+        pSuperMorpion->valide[NB_CASES] = nbMorpion + 1;
+    }
+    
+    pSuperMorpion->grille[nbMorpion].state = -1;
+    
+    pSuperMorpion->grille[nbMorpion].valide[column+line] = 1;
+    pSuperMorpion->valide[nbMorpion] = 1;
+    
+    pSuperMorpion->trait = (pSuperMorpion->trait + 1)%2;
+    pSuperMorpion->grille[nbMorpion].grille[column+line] = '.';
+    
+    return pSuperMorpion;
+}
+
+T_superM initSuperGrille(T_superM pSuperMorpion, char superPosition[MAXLEN]) {
+    int indice = 0;
+    
+    for (int i = 0 ; i < NB_CASES ; i++) {
+        pSuperMorpion->grille[i].state = -1;
+        pSuperMorpion->valide[i] = 1;
+    }
+    pSuperMorpion->valide[9] = -1;
+    
+    for (int i = 0 ; i < NB_CASES ; i++) {
+        char c = superPosition[indice];
+        if (isupper(c)) {
+            if (c == 'X') {
+                pSuperMorpion->grille[i].state = 1;
+            } else {
+                pSuperMorpion->grille[i].state = 0;
+            }
+            pSuperMorpion->valide[i] = 0;
+            indice++;
+        } else {
+            int num = c - '0';
+            if (num == 9) {
+                char position[MAXLEN] = "9 1";
+                pSuperMorpion->grille[i] = *initGrille(&pSuperMorpion->grille[i], position);
+                indice++;
+            } else {
+                int n = 0;
+                int j = 0;
+                char position[MAXLEN];
+                
+                while (n < 9) {
+                    c = superPosition[indice];
+                    num = c - '0';
+                    if (isalpha(c)) {
+                        position[j] = c;
+                        j++;
+                        n++;
+                    } else {
+                        position[j] = c;
+                        j++;
+                        n += num;
+                    }
+                    indice++;
+                }
+                
+                if (n > 9) {
+                    printf("Erreur de synthaxe à l'indice %d !\n", indice);
+                    return pSuperMorpion;
+                }
+                
+                position[j++] = ' ';
+                position[j++] = '1';
+                position[j] = '\0';
+                pSuperMorpion->grille[i] = *initGrille(&pSuperMorpion->grille[i], position);
+            }
+        }
+    }
+    
+    if (superPosition[strlen(superPosition) - 2] == 'x') {
+        pSuperMorpion->trait = 1;
+    } else {
+        pSuperMorpion->trait = 0;
+    }
+    
+    return pSuperMorpion;
 }

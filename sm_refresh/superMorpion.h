@@ -1,10 +1,14 @@
 #include "morpion.h"
 
-#define MAXLEN 9999
+#ifndef MAXLEN
+
+    #define MAXLEN 1001
+
+#endif
 
 #ifndef NB_CASES
 
-    #define NB_CASES
+    #define NB_CASES 9
 
 #endif
 
@@ -21,23 +25,11 @@
 
 #endif
 
-/*
- Il ne faudra plus empêcher le joueur i de jouer dans un morpion s'il a été le dernier à jouer.
- Il ne faudra pas utiliser la fonction showGrille pour afficher le super morpion.
- Il faudra trouver un moyen d'indiquer au joueur dans quel morpion il joue (s'il n'a pas le choix) et alors ne pas rendre nécessaire de préciser le morpion lors de la commande de jeu.
- ajouteSuperPosition devra utiliser ajoutePosition.
- Il faudra modifier showGrilleState pour pouvoir l'utiliser dans showSuperGrilleState.
- Il faudra utiliser le pattern suivant pour les morpions :
- 1 2 3
- 4 5 6
- 7 8 9
- */
-
 void showSuperGrille(T_superM pSuperMorpion);
 T_superMorpion newSuperMorpion();
-T_superMorpion ajouteSuperPosition(T_superMorpion superMorpion, char position[5],int visible); //visible permet d'afficher quelque chose ou non
-int checkSuperGagnant(T_superM pSuperMorpion, int visible);
+T_superM ajouteSuperPosition(T_superM pSuperMorpion, char position[5], int showNextCase);
+int checkSuperGagnant(T_superM pSuperMorpion);
 void showSuperGrilleState(T_superM pSuperMorpion);
-void showPosition(T_superM pSuperMorpion);
-
-
+void showPosition(T_superM pSuperMorpion, char chemin[MAXLEN]);
+T_superM removeLastSuperPosition(T_superM pSuperMorpion, char position[5], int isCaseAuChoix);
+T_superM initSuperGrille(T_superM pSuperMorpion, char superPosition[MAXLEN]);

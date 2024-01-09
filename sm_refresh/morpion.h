@@ -1,3 +1,9 @@
+#ifndef MAXLEN
+
+    #define MAXLEN 1001
+
+#endif
+
 #ifndef NB_CASES
 
     #define NB_CASES 9
@@ -18,9 +24,9 @@
 
 #endif
 
-void showGrille(T_morpion morpion);
-char getChar(T_morpion morpion, int indice);
+void showGrille(T_morp pMorpion);
 T_morpion newMorpion();
 T_morp ajoutePosition(T_morp pMorpion, char position[3]);
-int checkGagnant(T_morp pMorpion, int visible); //visible permet d'afficher quelque chose ou non
+int checkGagnant(T_morp pMorpion, int showGagnant);
 void showGrilleState(T_morp pMorpion);
+T_morp initGrille(T_morp pMorpion, char position[MAXLEN]);
