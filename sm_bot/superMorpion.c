@@ -136,85 +136,11 @@ int checkSuperGagnant(T_superM pSuperMorpion,int visible) {
         if (visible) {printf("Le gagnant est le joueur 2 !\n");}
         return 3;
     }
-    /*
-    int s = 0;
-    for (int i = 0 ; i < NB_CASES ; i++) {
-        if (!pSuperMorpion->valide[i]) {
-            s++;
-        }
-    }
-    if (s < 3) {
-        return 0;
-    } else if (s == 9) {
-        int nbr1;
-        for (int i=0;i<9;i++)
-        {
-            nbr1 += pSuperMorpion->grille[i].state;
-        }
-        if (nbr1>5)
-        {
-            if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-            return 2;
-        }
-        else if (nbr1<5)
-        {
-            if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-            return 3;
-        }
-        
-        printf("Match nul !");
-        return 1;
-    }
-
-
-    
-    int gagnant = 0;
-    int column = 0;
-    while ((column < 3) && (!gagnant)) {
-        if ((pSuperMorpion->grille[column*4].state >= 0) && (pSuperMorpion->grille[column*4].state == pSuperMorpion->grille[column*4 + 1].state) && (pSuperMorpion->grille[column*4].state == pSuperMorpion->grille[column*4 + 2].state)) {
-            if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
-            } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
-            }
-            return gagnant;
-        } else if ((pSuperMorpion->grille[column].state != -1) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 3].state) && (pSuperMorpion->grille[column].state == pSuperMorpion->grille[column + 6].state)) {
-            gagnant = 2;
-            if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
-            } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
-            }
-            return gagnant;
-        }
-        column++;
-    }
-    
-    if (((pSuperMorpion->grille[2].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[2].state == pSuperMorpion->grille[6].state)) || ((pSuperMorpion->grille[0].state == pSuperMorpion->grille[4].state) && (pSuperMorpion->grille[0].state == pSuperMorpion->grille[8].state))) {
-        if (pSuperMorpion->grille[4].state != -1) 
-        {
-            gagnant = 2;
-            if (pSuperMorpion->grille[column].state) {
-                if (visible) {printf("Le gagnant est le joueur 1 !\n");}
-                gagnant = 2;
-            } else {
-                if (visible) {printf("Le gagnant est le joueur 2 !\n");}
-                gagnant = 3;
-            }
-        }
-        return gagnant;
-    }
-    */
    return 0;
 }
 
 T_superMorpion decryptSuper(char * fen)
 {
-    //int corres[9] = {6,3,0,7,4,1,8,5,2};
     int corres[] = {2, 5, 8, 1, 4, 7, 0, 3, 6};
     T_superMorpion morpi = newSuperMorpion();
     int i = 1;

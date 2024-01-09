@@ -51,7 +51,7 @@
         int line = atoi(&position[1]);
         
         if (!pMorpion->valide[column+line]) {
-            printf("Coup invalide, rejouez !\n");
+            //printf("Coup invalide, rejouez !\n");
             return pMorpion;    
         }
         
@@ -103,64 +103,4 @@
         }
 
         return 0;
-        /*
-        int column = 0;
-        
-        while ((column < 3) && (!gagnant)) {
-            if ((pMorpion->grille[column*4] != '.') && (pMorpion->grille[column*4 + 1] != '.') && (pMorpion->grille[column*4 + 2] != '.') && (pMorpion->grille[column*4] == pMorpion->grille[column*4 + 1]) && (pMorpion->grille[column*4] == pMorpion->grille[column*4 + 2])) {
-                gagnant = 1;
-                if (pMorpion->trait) {
-                    if (visible) {printf("Le joueur 1 a gagné un morpion !\n");}
-                    pMorpion->state = 1;
-                } else {
-                    if (visible) {printf("Le joueur 2 a gagné un morpion !\n");}
-                    pMorpion->state = 0;
-                }
-            } else if ((pMorpion->grille[column] != '.') && (pMorpion->grille[column + 3] != '.') && (pMorpion->grille[column + 6] != '.') && (pMorpion->grille[column] == pMorpion->grille[column + 3]) && (pMorpion->grille[column] == pMorpion->grille[column + 6])) {
-                gagnant = 1;
-                if (pMorpion->grille[column]) {
-                    if (visible) {printf("Le joueur 1 a gagné un morpion !\n");}
-                    pMorpion->state = 1;
-                } else {
-                    if (visible) {printf("Le joueur 2 a gagné un morpion !\n");}
-                    pMorpion->state = 0;
-                }
-            }
-            column++;
-        }
-        
-        if (((pMorpion->grille[2] == pMorpion->grille[4]) && (pMorpion->grille[2] == pMorpion->grille[6])) || ((pMorpion->grille[0] == pMorpion->grille[4]) && (pMorpion->grille[0] == pMorpion->grille[8]))) {
-            if (((pMorpion->grille[2] != '.') && (pMorpion->grille[4] != '.') && (pMorpion->grille[6] != '.')) || ((pMorpion->grille[0] != '.') && (pMorpion->grille[4] != '.') && (pMorpion->grille[8] != '.'))) {
-                gagnant = 1;
-                if (pMorpion->grille[column]) {
-                    if (visible) {printf("Le joueur 1 a gagné un morpion !\n");}
-                    pMorpion->state = 1;
-                } else {
-                    if (visible) {printf("Le joueur 2 a gagné un morpion !\n");}
-                    pMorpion->state = 0;
-                }
-            }
-        }
-        */
-    }
-
-    void showGrilleState(T_morp pMorpion) {
-        int ordre[] = {2, 5, 8, 1, 4, 7, 0, 3, 6};
-        int i = 0;
-        while (i < NB_CASES) {
-            if (pMorpion->grille[ordre[i]] == 'X') {
-                printf("x");
-                i++;
-            } else if (pMorpion->grille[ordre[i]] == 'O') {
-                printf("o");
-                i++;
-            } else {
-                int s = 0;
-                while ((i < NB_CASES) && (pMorpion->grille[ordre[i]] == '.')) {
-                    s++;
-                    i++;
-                }
-                printf("%d", s);
-            }
-        }
     }

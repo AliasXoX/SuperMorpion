@@ -163,7 +163,7 @@ T_result alphabeta(T_superM morpi, int depth, int traitOrdi,double alpha,double 
     }
     if (traitOrdi==morpi->trait)
     {
-        resultat.poids = -99999;
+        resultat.poids = -99999999999;
         if (morpi->valide[NB_CASES]!=-1)
         {
             for (int i = 'a'; i<='c';i++)
@@ -239,7 +239,7 @@ T_result alphabeta(T_superM morpi, int depth, int traitOrdi,double alpha,double 
 
     else
     {
-        resultat.poids = 99999;
+        resultat.poids = 99999999999;
         if (morpi->valide[NB_CASES]!=-1)
         {
             for (int i = 'a'; i<='c';i++)

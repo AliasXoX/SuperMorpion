@@ -23,4 +23,3 @@ char getChar(T_morpion morpion, int indice);
 T_morpion newMorpion();
 T_morp ajoutePosition(T_morp pMorpion, char position[3]);
 int checkGagnant(T_morp pMorpion, int visible); //visible permet d'afficher quelque chose ou non
-void showGrilleState(T_morp pMorpion);
